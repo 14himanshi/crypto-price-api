@@ -20,7 +20,7 @@ async function fetchPriceBySymbol(symbol, currency = DEFAULT_CURRENCY) {
     throw new Error(`CoinGecko request failed with status ${response.status}`);
   }
 
-  const data = await response.json(); // example: { bitcoin: { usd: 123 } }
+  const data = await response.json(); // { bitcoin: { usd: 123 } }
   const price = data && data[coinId] ? data[coinId][currency] : undefined;
   if (typeof price !== "number") {
     throw new Error("Unexpected response from CoinGecko");
@@ -36,7 +36,7 @@ async function fetchPriceBySymbol(symbol, currency = DEFAULT_CURRENCY) {
   return result;
 }
 
-// One CoinGecko request for all coins (avoids too many calls / rate limits)
+
 async function fetchAllSupportedPrices(currency = DEFAULT_CURRENCY) {
   const symbols = Object.keys(SYMBOL_TO_ID);
   const ids = symbols.map((s) => SYMBOL_TO_ID[s]).join(",");

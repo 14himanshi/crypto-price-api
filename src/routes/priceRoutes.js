@@ -37,7 +37,6 @@ router.get("/sol", async (_req, res) => {
   }
 });
 
-// Must be above "/:symbol" or "prices" would be treated as a symbol
 router.get("/prices", async (_req, res) => {
   try {
     res.json({ prices: await fetchAllSupportedPrices() });
